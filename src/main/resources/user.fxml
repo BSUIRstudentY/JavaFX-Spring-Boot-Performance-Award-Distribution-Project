@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.bonussystem.controller.UserController" spacing="10" alignment="CENTER" stylesheets="/styles.css" styleClass="root">
+    <Label text="Добро пожаловать!" styleClass="label"/>
+
+    <Button text="Подать заявку на регистрацию сотрудника" onAction="#showEmployeeRegistrationForm" styleClass="custom-button"/>
+
+    <TabPane styleClass="tab-pane">
+        <tabs>
+            <Tab text="Ваши показатели эффективности">
+                <TableView fx:id="efficiencyTable" prefWidth="400" prefHeight="200" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="efficiencyIdColumn" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="efficiencyKpiColumn" text="КПИ" prefWidth="150"/>
+                        <TableColumn fx:id="efficiencyRevenueColumn" text="Выручка (руб)" prefWidth="100"/>
+                        <TableColumn fx:id="efficiencyYearColumn" text="Год" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </Tab>
+            <Tab text="Ваши премии">
+                <TableView fx:id="bonusTable" prefWidth="400" prefHeight="200" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="bonusIdColumn" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="bonusEmployeeNameColumn" text="Сотрудник" prefWidth="150"/>
+                        <TableColumn fx:id="bonusAmountColumn" text="Сумма (руб)" prefWidth="100"/>
+                        <TableColumn fx:id="bonusYearColumn" text="Год" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </Tab>
+        </tabs>
+    </TabPane>
+
+    <Button text="Назад" onAction="#goBack" styleClass="custom-button"/>
+</VBox>

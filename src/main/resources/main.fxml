@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.bonussystem.controller.MainController" spacing="10" alignment="CENTER">
+    <TableView fx:id="employeeTable">
+        <columns>
+            <TableColumn fx:id="nameColumn" text="Name" prefWidth="150"/>
+            <TableColumn fx:id="departmentColumn" text="Department" prefWidth="150"/>
+            <TableColumn fx:id="roleColumn" text="Role" prefWidth="100"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Name:"/>
+        <TextField fx:id="nameField"/>
+        <Label text="Department ID:"/>
+        <TextField fx:id="departmentIdField"/>
+        <Label text="Role ID:"/>
+        <TextField fx:id="roleIdField"/>
+        <Button text="Add Employee" onAction="#addEmployee"/>
+    </HBox>
+    <TableView fx:id="piTable">
+        <columns>
+            <TableColumn fx:id="employeeNameColumn" text="Employee" prefWidth="150"/>
+            <TableColumn fx:id="kpiColumn" text="KPI" prefWidth="100"/>
+            <TableColumn fx:id="revenueColumn" text="Revenue" prefWidth="100"/>
+            <TableColumn fx:id="yearColumn" text="Year" prefWidth="100"/>
+            <TableColumn fx:id="bonusColumn" text="Bonus" prefWidth="100"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Employee ID:"/>
+        <TextField fx:id="employeeIdField"/>
+        <Label text="KPI:"/>
+        <TextField fx:id="kpiField"/>
+        <Label text="Revenue:"/>
+        <TextField fx:id="revenueField"/>
+        <Label text="Year:"/>
+        <TextField fx:id="yearField"/>
+        <Button text="Add Performance Indicator" onAction="#addPerformanceIndicator"/>
+    </HBox>
+    <Button text="Calculate Bonuses" onAction="#calculateBonuses"/>
+</VBox>

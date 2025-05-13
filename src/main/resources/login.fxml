@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.bonussystem.controller.LoginController" spacing="10" alignment="CENTER" stylesheets="/styles.css" styleClass="root">
+    <Label text="Вход в систему" styleClass="label"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Имя пользователя:" styleClass="label"/>
+        <TextField fx:id="usernameField" promptText="Введите имя пользователя" styleClass="custom-textfield"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Пароль:" styleClass="label"/>
+        <PasswordField fx:id="passwordField" promptText="Введите пароль" styleClass="custom-textfield"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Войти" onAction="#login" styleClass="custom-button"/>
+        <Button text="Регистрация" onAction="#showRegister" styleClass="custom-button"/>
+    </HBox>
+
+    <Label fx:id="errorLabel" text="" styleClass="label"/>
+</VBox>
