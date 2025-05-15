@@ -1,160 +1,209 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bonussystem.controller.AdminController" spacing="10" stylesheets="@styles.css">
     <TabPane fx:id="tabPane">
-        <!-- Вкладка для отделов -->
+        <!-- Другие вкладки остаются без изменений -->
         <Tab text="Отделы">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <HBox spacing="10">
-                    <TextField fx:id="departmentNameField" promptText="Название отдела" styleClass="custom-textfield"/>
-                    <Button text="Добавить отдел" onAction="#addDepartment" styleClass="custom-button"/>
-                </HBox>
-                <TableView fx:id="departmentTable" styleClass="table-view">
+            <VBox spacing="10">
+                <TableView fx:id="departmentTable">
                     <columns>
-                        <TableColumn text="ID" prefWidth="100" fx:id="departmentIdColumn"/>
-                        <TableColumn text="Название" prefWidth="150" fx:id="departmentNameColumn"/>
+                        <TableColumn fx:id="departmentIdColumn" text="ID" prefWidth="100"/>
+                        <TableColumn fx:id="departmentNameColumn" text="Название" prefWidth="200"/>
                     </columns>
                 </TableView>
                 <HBox spacing="10">
-                    <TextField fx:id="editDepartmentIdField" promptText="ID отдела" styleClass="custom-textfield"/>
-                    <TextField fx:id="editDepartmentNameField" promptText="Новое название" styleClass="custom-textfield"/>
-                    <Button text="Изменить отдел" onAction="#editDepartment" styleClass="custom-button"/>
-                    <Button text="Удалить отдел" onAction="#deleteDepartment" styleClass="custom-button"/>
+                    <Label text="Название отдела:"/>
+                    <TextField fx:id="departmentNameField" promptText="Введите название"/>
+                    <Button text="Добавить" onAction="#addDepartment"/>
+                </HBox>
+                <HBox spacing="10">
+                    <TextField fx:id="editDepartmentIdField" promptText="ID отдела для редактирования"/>
+                    <TextField fx:id="editDepartmentNameField" promptText="Новое название"/>
+                    <Button text="Редактировать" onAction="#editDepartment"/>
+                    <Button text="Удалить" onAction="#deleteDepartment"/>
                 </HBox>
             </VBox>
         </Tab>
-
-        <!-- Вкладка для ролей -->
         <Tab text="Роли">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <HBox spacing="10">
-                    <TextField fx:id="roleNameField" promptText="Название роли" styleClass="custom-textfield"/>
-                    <TextField fx:id="roleBaseBonusRateField" promptText="Базовая ставка (например, 0.1)" styleClass="custom-textfield"/>
-                    <Button text="Добавить роль" onAction="#addRole" styleClass="custom-button"/>
-                </HBox>
-                <TableView fx:id="roleTable" styleClass="table-view">
+            <VBox spacing="10">
+                <TableView fx:id="roleTable">
                     <columns>
-                        <TableColumn text="ID" prefWidth="100" fx:id="roleIdColumn"/>
-                        <TableColumn text="Название" prefWidth="150" fx:id="roleNameColumn"/>
-                        <TableColumn text="Базовая ставка" prefWidth="100" fx:id="roleBaseBonusRateColumn"/>
+                        <TableColumn fx:id="roleIdColumn" text="ID" prefWidth="100"/>
+                        <TableColumn fx:id="roleNameColumn" text="Название" prefWidth="200"/>
+                        <TableColumn fx:id="roleBaseBonusRateColumn" text="Базовая ставка премии" prefWidth="150"/>
                     </columns>
                 </TableView>
                 <HBox spacing="10">
-                    <TextField fx:id="editRoleIdField" promptText="ID роли" styleClass="custom-textfield"/>
-                    <TextField fx:id="editRoleNameField" promptText="Новое название" styleClass="custom-textfield"/>
-                    <TextField fx:id="editRoleBaseBonusRateField" promptText="Новая ставка" styleClass="custom-textfield"/>
-                    <Button text="Изменить роль" onAction="#editRole" styleClass="custom-button"/>
-                    <Button text="Удалить роль" onAction="#deleteRole" styleClass="custom-button"/>
+                    <Label text="Название роли:"/>
+                    <TextField fx:id="roleNameField" promptText="Введите название"/>
+                    <Label text="Базовая ставка премии:"/>
+                    <TextField fx:id="roleBaseBonusRateField" promptText="Введите ставку"/>
+                    <Button text="Добавить" onAction="#addRole"/>
+                </HBox>
+                <HBox spacing="10">
+                    <TextField fx:id="editRoleIdField" promptText="ID роли для редактирования"/>
+                    <TextField fx:id="editRoleNameField" promptText="Новое название"/>
+                    <TextField fx:id="editRoleBaseBonusRateField" promptText="Новая ставка"/>
+                    <Button text="Редактировать" onAction="#editRole"/>
+                    <Button text="Удалить" onAction="#deleteRole"/>
                 </HBox>
             </VBox>
         </Tab>
-
-        <!-- Вкладка для сотрудников -->
         <Tab text="Сотрудники">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <HBox spacing="10">
-                    <TextField fx:id="employeeNameField" promptText="Имя сотрудника" styleClass="custom-textfield"/>
-                    <ComboBox fx:id="employeeDepartmentComboBox" promptText="Выберите отдел" styleClass="combo-box"/>
-                    <ComboBox fx:id="employeeRoleComboBox" promptText="Выберите роль" styleClass="combo-box"/>
-                    <Button text="Добавить сотрудника" onAction="#addEmployee" styleClass="custom-button"/>
-                </HBox>
-                <TableView fx:id="employeeTable" styleClass="table-view">
+            <VBox spacing="10">
+                <TableView fx:id="employeeTable">
                     <columns>
-                        <TableColumn text="ID" prefWidth="100" fx:id="employeeIdColumn"/>
-                        <TableColumn text="Имя" prefWidth="150" fx:id="employeeNameColumn"/>
-                        <TableColumn text="Отдел" prefWidth="150" fx:id="employeeDepartmentColumn"/>
-                        <TableColumn text="Роль" prefWidth="150" fx:id="employeeRoleColumn"/>
-                        <TableColumn text="Статус" prefWidth="100" fx:id="employeeStatusColumn"/>
+                        <TableColumn fx:id="employeeIdColumn" text="ID" prefWidth="100"/>
+                        <TableColumn fx:id="employeeNameColumn" text="Имя" prefWidth="200"/>
+                        <TableColumn fx:id="employeeDepartmentColumn" text="Отдел" prefWidth="150"/>
+                        <TableColumn fx:id="employeeRoleColumn" text="Роль" prefWidth="150"/>
+                        <TableColumn fx:id="employeeStatusColumn" text="Статус" prefWidth="100"/>
                     </columns>
                 </TableView>
                 <HBox spacing="10">
-                    <TextField fx:id="editEmployeeIdField" promptText="ID сотрудника" styleClass="custom-textfield"/>
-                    <TextField fx:id="editEmployeeNameField" promptText="Новое имя" styleClass="custom-textfield"/>
-                    <ComboBox fx:id="editEmployeeDepartmentComboBox" promptText="Новый отдел" styleClass="combo-box"/>
-                    <ComboBox fx:id="editEmployeeRoleComboBox" promptText="Новая роль" styleClass="combo-box"/>
-                    <Button text="Изменить сотрудника" onAction="#editEmployee" styleClass="custom-button"/>
-                    <Button text="Удалить сотрудника" onAction="#deleteEmployee" styleClass="custom-button"/>
+                    <Label text="Имя сотрудника:"/>
+                    <TextField fx:id="employeeNameField" promptText="Введите имя"/>
+                    <Label text="Отдел:"/>
+                    <ComboBox fx:id="employeeDepartmentComboBox"/>
+                    <Label text="Роль:"/>
+                    <ComboBox fx:id="employeeRoleComboBox"/>
+                    <Button text="Добавить" onAction="#addEmployee"/>
+                </HBox>
+                <HBox spacing="10">
+                    <TextField fx:id="editEmployeeIdField" promptText="ID сотрудника для редактирования"/>
+                    <TextField fx:id="editEmployeeNameField" promptText="Новое имя"/>
+                    <ComboBox fx:id="editEmployeeDepartmentComboBox"/>
+                    <ComboBox fx:id="editEmployeeRoleComboBox"/>
+                    <Button text="Редактировать" onAction="#editEmployee"/>
+                    <Button text="Удалить" onAction="#deleteEmployee"/>
                 </HBox>
             </VBox>
         </Tab>
-
-        <!-- Вкладка для заявок -->
         <Tab text="Заявки">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <TableView fx:id="pendingEmployeeTable" styleClass="table-view">
+            <VBox spacing="10">
+                <TableView fx:id="pendingEmployeeTable">
                     <columns>
-                        <TableColumn text="ID" prefWidth="100" fx:id="pendingEmployeeIdColumn"/>
-                        <TableColumn text="Имя" prefWidth="150" fx:id="pendingEmployeeNameColumn"/>
-                        <TableColumn text="Роль" prefWidth="150" fx:id="pendingEmployeeRoleColumn"/>
-                        <TableColumn text="Отдел" prefWidth="150" fx:id="pendingEmployeeDepartmentColumn"/>
-                        <TableColumn text="Статус" prefWidth="100" fx:id="pendingEmployeeStatusColumn"/>
-                        <TableColumn text="Действия" prefWidth="200" fx:id="pendingEmployeeActionsColumn">
-                            <cellFactory>
-                                <org.example.bonussystem.controller.ButtonCellFactory/>
-                            </cellFactory>
-                        </TableColumn>
+                        <TableColumn fx:id="pendingEmployeeIdColumn" text="ID" prefWidth="100"/>
+                        <TableColumn fx:id="pendingEmployeeNameColumn" text="Имя" prefWidth="200"/>
+                        <TableColumn fx:id="pendingEmployeeRoleColumn" text="Роль" prefWidth="150"/>
+                        <TableColumn fx:id="pendingEmployeeDepartmentColumn" text="Отдел" prefWidth="150"/>
+                        <TableColumn fx:id="pendingEmployeeStatusColumn" text="Статус" prefWidth="100"/>
+                        <TableColumn fx:id="pendingEmployeeActionsColumn" text="Действия" prefWidth="150"/>
                     </columns>
                 </TableView>
             </VBox>
         </Tab>
-
-        <!-- Вкладка для показателей -->
-        <Tab text="Показатели эффективности">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <HBox spacing="10">
-                    <ComboBox fx:id="piEmployeeComboBox" promptText="Выберите сотрудника" styleClass="combo-box"/>
-                    <TextField fx:id="piKpiField" promptText="KPI (0-100)" styleClass="custom-textfield"/>
-                    <TextField fx:id="piRevenueField" promptText="Выручка (в рублях)" styleClass="custom-textfield"/>
-                    <TextField fx:id="piYearField" promptText="Год" styleClass="custom-textfield"/>
-                    <Button text="Добавить показатель" onAction="#addPerformanceIndicator" styleClass="custom-button"/>
-                </HBox>
-                <TableView fx:id="piTable" styleClass="table-view">
+        <Tab text="Показатели">
+            <VBox spacing="10">
+                <TableView fx:id="piTable">
                     <columns>
-                        <TableColumn text="ID" prefWidth="100" fx:id="piIdColumn"/>
-                        <TableColumn text="Сотрудник" prefWidth="150" fx:id="piEmployeeNameColumn"/>
-                        <TableColumn text="KPI" prefWidth="100" fx:id="piKpiColumn"/>
-                        <TableColumn text="Выручка (руб)" prefWidth="100" fx:id="piRevenueColumn"/>
-                        <TableColumn text="Год" prefWidth="100" fx:id="piYearColumn"/>
+                        <TableColumn fx:id="piIdColumn" text="ID" prefWidth="100"/>
+                        <TableColumn fx:id="piEmployeeNameColumn" text="Сотрудник" prefWidth="200"/>
+                        <TableColumn fx:id="piKpiColumn" text="KPI (%)" prefWidth="100"/>
+                        <TableColumn fx:id="piRevenueColumn" text="Доход" prefWidth="100"/>
+                        <TableColumn fx:id="piMonthYearColumn" text="Месяц/Год" prefWidth="150"/>
                     </columns>
                 </TableView>
                 <HBox spacing="10">
-                    <TextField fx:id="editPiIdField" promptText="ID показателя" styleClass="custom-textfield"/>
-                    <ComboBox fx:id="editPiEmployeeComboBox" promptText="Новый сотрудник" styleClass="combo-box"/>
-                    <TextField fx:id="editPiKpiField" promptText="Новый KPI" styleClass="custom-textfield"/>
-                    <TextField fx:id="editPiRevenueField" promptText="Новая выручка (в рублях)" styleClass="custom-textfield"/>
-                    <TextField fx:id="editPiYearField" promptText="Новый год" styleClass="custom-textfield"/>
-                    <Button text="Изменить показатель" onAction="#editPerformanceIndicator" styleClass="custom-button"/>
-                    <Button text="Удалить показатель" onAction="#deletePerformanceIndicator" styleClass="custom-button"/>
+                    <Label text="Сотрудник:"/>
+                    <ComboBox fx:id="piEmployeeComboBox"/>
+                    <Label text="KPI (%):"/>
+                    <TextField fx:id="piKpiField" promptText="0-100"/>
+                    <Label text="Доход:"/>
+                    <TextField fx:id="piRevenueField" promptText="Введите доход"/>
+                    <Label text="Месяц:"/>
+                    <TextField fx:id="piMonthField" promptText="1-12"/>
+                    <Label text="Год:"/>
+                    <TextField fx:id="piYearField" promptText="2000-2025"/>
+                    <Button text="Добавить" onAction="#addPerformanceIndicator"/>
+                </HBox>
+                <HBox spacing="10">
+                    <TextField fx:id="editPiIdField" promptText="ID показателя для редактирования"/>
+                    <ComboBox fx:id="editPiEmployeeComboBox"/>
+                    <TextField fx:id="editPiKpiField" promptText="Новый KPI"/>
+                    <TextField fx:id="editPiRevenueField" promptText="Новый доход"/>
+                    <TextField fx:id="editPiMonthField" promptText="Новый месяц"/>
+                    <TextField fx:id="editPiYearField" promptText="Новый год"/>
+                    <Button text="Редактировать" onAction="#editPerformanceIndicator"/>
+                    <Button text="Удалить" onAction="#deletePerformanceIndicator"/>
                 </HBox>
             </VBox>
         </Tab>
-
-        <!-- Вкладка для премий -->
         <Tab text="Премии">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <TableView fx:id="bonusTable" styleClass="table-view">
+            <VBox spacing="10">
+                <TableView fx:id="bonusTable">
                     <columns>
-                        <TableColumn text="ID" prefWidth="100" fx:id="bonusIdColumn"/>
-                        <TableColumn text="Сотрудник" prefWidth="150" fx:id="bonusEmployeeNameColumn"/>
-                        <TableColumn text="Сумма (руб)" prefWidth="100" fx:id="bonusAmountColumn"/>
-                        <TableColumn text="Год" prefWidth="100" fx:id="bonusYearColumn"/>
+                        <TableColumn fx:id="bonusIdColumn" text="ID" prefWidth="100"/>
+                        <TableColumn fx:id="bonusEmployeeNameColumn" text="Сотрудник" prefWidth="200"/>
+                        <TableColumn fx:id="bonusAmountColumn" text="Сумма премии" prefWidth="150"/>
+                        <TableColumn fx:id="bonusMonthYearColumn" text="Месяц/Год" prefWidth="150"/>
                     </columns>
                 </TableView>
                 <HBox spacing="10">
-                    <TextField fx:id="editBonusIdField" promptText="ID премии" styleClass="custom-textfield"/>
-                    <ComboBox fx:id="editBonusEmployeeComboBox" promptText="Новый сотрудник" styleClass="combo-box"/>
-                    <TextField fx:id="editBonusAmountField" promptText="Новая сумма (в рублях)" styleClass="custom-textfield"/>
-                    <TextField fx:id="editBonusYearField" promptText="Новый год" styleClass="custom-textfield"/>
-                    <Button text="Изменить премию" onAction="#editBonus" styleClass="custom-button"/>
-                    <Button text="Удалить премию" onAction="#deleteBonus" styleClass="custom-button"/>
-                    <Button text="Рассчитать премии" onAction="#calculateBonuses" styleClass="custom-button"/>
+                    <TextField fx:id="editBonusIdField" promptText="ID премии для редактирования"/>
+                    <ComboBox fx:id="editBonusEmployeeComboBox"/>
+                    <TextField fx:id="editBonusAmountField" promptText="Новая сумма"/>
+                    <TextField fx:id="editBonusMonthField" promptText="Новый месяц"/>
+                    <TextField fx:id="editBonusYearField" promptText="Новый год"/>
+                    <Button text="Редактировать" onAction="#editBonus"/>
+                    <Button text="Удалить" onAction="#deleteBonus"/>
                 </HBox>
+                <Button text="Рассчитать премии" onAction="#calculateBonuses"/>
+            </VBox>
+        </Tab>
+        <Tab text="Аналитика заявок">
+            <VBox spacing="10">
+                <TabPane>
+                    <Tab text="Все заявки">
+                        <VBox spacing="10">
+                            <TableView fx:id="analyticsTable">
+                                <columns>
+                                    <TableColumn fx:id="analyticsIdColumn" text="ID" prefWidth="100"/>
+                                    <TableColumn fx:id="analyticsNameColumn" text="Имя" prefWidth="200"/>
+                                    <TableColumn fx:id="analyticsRoleColumn" text="Роль" prefWidth="150"/>
+                                    <TableColumn fx:id="analyticsDepartmentColumn" text="Отдел" prefWidth="150"/>
+                                    <TableColumn fx:id="analyticsStatusColumn" text="Статус" prefWidth="100"/>
+                                    <TableColumn fx:id="analyticsRequestDateColumn" text="Дата заявки" prefWidth="150"/>
+                                </columns>
+                            </TableView>
+                            <Button text="Скачать в CSV" onAction="#downloadAnalyticsAsCsv"/>
+                        </VBox>
+                    </Tab>
+                    <Tab text="По дням">
+                        <VBox spacing="10">
+                            <BarChart fx:id="dailyAnalyticsChart" prefHeight="400" prefWidth="600">
+                                <xAxis>
+                                    <CategoryAxis fx:id="dailyAnalyticsDateAxis" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis fx:id="dailyAnalyticsCountAxis" label="Количество заявок" />
+                                </yAxis>
+                            </BarChart>
+                        </VBox>
+                    </Tab>
+                </TabPane>
+            </VBox>
+        </Tab>
+        <Tab text="Выручка сотрудников">
+            <VBox spacing="10">
+                <Pane fx:id="revenueWindRosePane" prefHeight="400" prefWidth="400" />
+            </VBox>
+        </Tab>
+        <Tab text="Консоль">
+            <VBox spacing="10">
+                <TextArea fx:id="consoleInput" promptText="Введите команды..."/>
+                <Button fx:id="executeButton" text="Выполнить" onAction="#executeCommand"/>
+                <TextArea fx:id="consoleOutput" editable="false"/>
             </VBox>
         </Tab>
     </TabPane>
-    <Button text="Назад" onAction="#goBack" styleClass="custom-button"/>
+    <Button text="Назад" onAction="#goBack"/>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
 </VBox>

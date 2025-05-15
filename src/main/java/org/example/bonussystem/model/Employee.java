@@ -2,6 +2,8 @@ package org.example.bonussystem.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -11,6 +13,11 @@ public class Employee {
 
     @Column(name = "name")
     private String name;
+
+    private LocalDateTime requestDate;
+
+
+
 
     @Column(name = "status")
     private String status;
@@ -26,6 +33,15 @@ public class Employee {
     @Column(name = "user_id")
     private Long userId;
 
+
+    // Getter and Setter
+    public LocalDateTime getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(LocalDateTime requestDate) {
+        this.requestDate = requestDate;
+    }
     // Геттеры и сеттеры
     public Long getId() {
         return id;

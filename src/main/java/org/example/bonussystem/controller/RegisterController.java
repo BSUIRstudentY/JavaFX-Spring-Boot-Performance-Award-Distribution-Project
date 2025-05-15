@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -25,6 +26,8 @@ public class RegisterController {
 
     private ApplicationContext springContext;
     private UserService userService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -40,30 +43,51 @@ public class RegisterController {
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
 
+        // Проверка на заполнение полей
         if (username.isEmpty() || password.isEmpty()) {
             errorLabel.setText("Пожалуйста, заполните все поля.");
             return;
         }
 
+        // Простая валидация пароля (минимум 6 символов)
+        if (password.length() < 6) {
+            errorLabel.setText("Пароль должен содержать минимум 6 символов.");
+            return;
+        }
+
+        // Проверка уникальности имени пользователя
         if (userService.findByUsername(username) != null) {
             errorLabel.setText("Пользователь с таким именем уже существует.");
             return;
         }
 
-        Role userRole = userService.findOrCreateRoleByName("User", 0.1);
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setRole(userRole);
-        userService.save(user);
+        try {
+            // Получаем или создаём роль "User"
+            Role userRole = userService.findOrCreateRoleByName("User", 0.1);
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(bCryptPasswordEncoder.encode(password)); // Здесь можно добавить хеширование, например, через BCrypt
+            user.setRole(userRole);
 
-        // Переход к окну входа после успешной регистрации
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-        loader.setControllerFactory(springContext::getBean);
-        Parent root = loader.load();
+            // Сохраняем пользователя
+            userService.save(user);
+            errorLabel.setText("Регистрация успешна! Переход к входу...");
+            errorLabel.setStyle("-fx-text-fill: green;");
 
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-        stage.setScene(new Scene(root, 400, 300));
-        stage.setTitle("Вход");
+            // Задержка перед переходом (опционально для обратной связи)
+            Thread.sleep(1000);
+
+            // Переход к окну входа
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            loader.setControllerFactory(springContext::getBean);
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root, 400, 300));
+            stage.setTitle("Вход");
+        } catch (Exception e) {
+            errorLabel.setText("Ошибка при регистрации: " + e.getMessage());
+            errorLabel.setStyle("-fx-text-fill: red;");
+            e.printStackTrace();
+        }
     }
 }

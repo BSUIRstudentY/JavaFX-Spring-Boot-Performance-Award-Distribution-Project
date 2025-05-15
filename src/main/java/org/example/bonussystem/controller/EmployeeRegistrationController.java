@@ -17,6 +17,7 @@ import org.example.bonussystem.repository.PerformanceIndicatorRepository;
 import org.example.bonussystem.repository.RoleRepository;
 import org.example.bonussystem.service.BonusService;
 import org.example.bonussystem.service.EmployeeService;
+import org.example.bonussystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -115,9 +116,11 @@ public class EmployeeRegistrationController {
             PerformanceIndicatorRepository perfRepo = springContext.getBean(PerformanceIndicatorRepository.class);
             EmployeeRepository empRepo = springContext.getBean(EmployeeRepository.class);
             BonusService bonusService = springContext.getBean(BonusService.class);
-
+            DepartmentRepository departmentRepository = springContext.getBean(DepartmentRepository.class);
+            RoleRepository roleRepository = springContext.getBean(RoleRepository.class);
+            UserService userService = springContext.getBean(UserService.class);
             // Передаём currentUser через конструктор
-            loader.setControllerFactory(param -> new UserController(springContext, currentUser, perfRepo, empRepo, bonusService));
+            loader.setControllerFactory(param -> new UserController(springContext, currentUser, perfRepo, empRepo, bonusService, departmentRepository, roleRepository, userService));
 
             Parent root = loader.load();
             UserController controller = loader.getController();
@@ -141,9 +144,11 @@ public class EmployeeRegistrationController {
         PerformanceIndicatorRepository perfRepo = springContext.getBean(PerformanceIndicatorRepository.class);
         EmployeeRepository empRepo = springContext.getBean(EmployeeRepository.class);
         BonusService bonusService = springContext.getBean(BonusService.class);
-
+        DepartmentRepository departmentRepository = springContext.getBean(DepartmentRepository.class);
+        RoleRepository roleRepository = springContext.getBean(RoleRepository.class);
+        UserService userService = springContext.getBean(UserService.class);
         // Передаём currentUser через конструктор
-        loader.setControllerFactory(param -> new UserController(springContext, currentUser, perfRepo, empRepo, bonusService));
+        loader.setControllerFactory(param -> new UserController(springContext, currentUser, perfRepo, empRepo, bonusService, departmentRepository, roleRepository, userService));
 
         Parent root = loader.load();
         UserController controller = loader.getController();

@@ -28,4 +28,4 @@
     </HBox>
 
     <Label fx:id="errorLabel" text="" styleClass="label"/>
-</VBox>z
+</VBox>

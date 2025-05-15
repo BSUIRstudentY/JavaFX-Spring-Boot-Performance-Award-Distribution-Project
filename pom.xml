@@ -13,8 +13,61 @@
         <spring-boot.version>3.2.0</spring-boot.version>
     </properties>
 
+
+
     <dependencies>
         <!-- JavaFX -->
+
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jcommon</artifactId>
+            <version>1.0.23</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+
+
+
+
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.1.8</version>
+        </dependency>
+
+
+
+            <!-- JFreeChart -->
+            <dependency>
+                <groupId>org.jfree</groupId>
+                <artifactId>jfreechart</artifactId>
+                <version>1.5.3</version>
+            </dependency>
+
+            <!-- JCommon (иногда требуется для старых версий JFreeChart) -->
+            <dependency>
+                <groupId>org.jfree</groupId>
+                <artifactId>jcommon</artifactId>
+                <version>1.0.23</version>
+            </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>5.8.0</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -78,7 +131,11 @@
 
 
 
-
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version>
+        </dependency>
 
 
 
@@ -109,6 +166,11 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+
+
+
+
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>

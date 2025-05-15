@@ -3,35 +3,85 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.bonussystem.controller.UserController" spacing="10" alignment="CENTER" stylesheets="/styles.css" styleClass="root">
-    <Label text="Добро пожаловать!" styleClass="label"/>
-
-    <Button text="Подать заявку на регистрацию сотрудника" onAction="#showEmployeeRegistrationForm" styleClass="custom-button"/>
-
-    <TabPane styleClass="tab-pane">
-        <tabs>
-            <Tab text="Ваши показатели эффективности">
-                <TableView fx:id="efficiencyTable" prefWidth="400" prefHeight="200" styleClass="table-view">
-                    <columns>
-                        <TableColumn fx:id="efficiencyIdColumn" text="ID" prefWidth="50"/>
-                        <TableColumn fx:id="efficiencyKpiColumn" text="КПИ" prefWidth="150"/>
-                        <TableColumn fx:id="efficiencyRevenueColumn" text="Выручка (руб)" prefWidth="100"/>
-                        <TableColumn fx:id="efficiencyYearColumn" text="Год" prefWidth="100"/>
-                    </columns>
-                </TableView>
-            </Tab>
-            <Tab text="Ваши премии">
-                <TableView fx:id="bonusTable" prefWidth="400" prefHeight="200" styleClass="table-view">
-                    <columns>
-                        <TableColumn fx:id="bonusIdColumn" text="ID" prefWidth="50"/>
-                        <TableColumn fx:id="bonusEmployeeNameColumn" text="Сотрудник" prefWidth="150"/>
-                        <TableColumn fx:id="bonusAmountColumn" text="Сумма (руб)" prefWidth="100"/>
-                        <TableColumn fx:id="bonusYearColumn" text="Год" prefWidth="100"/>
-                    </columns>
-                </TableView>
-            </Tab>
-        </tabs>
-    </TabPane>
-
-    <Button text="Назад" onAction="#goBack" styleClass="custom-button"/>
-</VBox>
+<SplitPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.bonussystem.controller.UserController" dividerPositions="0.2" stylesheets="/styles.css">
+    <items>
+        <Accordion fx:id="sideMenu">
+            <panes>
+                <TitledPane fx:id="profilePane" text="Профиль" expanded="false">
+                    <content>
+                        <Button text="Открыть профиль" onAction="#showProfile" styleClass="custom-button"/>
+                    </content>
+                </TitledPane>
+                <TitledPane fx:id="refreshPane" text="Обновить" expanded="false">
+                    <content>
+                        <Button text="Обновить данные" onAction="#refreshData" styleClass="custom-button"/>
+                    </content>
+                </TitledPane>
+                <TitledPane fx:id="backPane" text="Выход" expanded="false">
+                    <content>
+                        <Button text="Назад" onAction="#goBack" styleClass="custom-button"/>
+                    </content>
+                </TitledPane>
+                <TitledPane fx:id="analyticsPane" text="Аналитика" expanded="false">
+                    <content>
+                        <Button text="Открыть аналитику" onAction="#showAnalytics" styleClass="custom-button"/>
+                    </content>
+                </TitledPane>
+                <TitledPane fx:id="registerPane" text="Регистрация" expanded="false">
+                    <content>
+                        <Button text="Подать заявку" onAction="#showEmployeeRegistrationForm" styleClass="custom-button"/>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+        <VBox spacing="10" alignment="CENTER" styleClass="root">
+            <Label text="Добро пожаловать!" styleClass="label"/>
+            <Label fx:id="currentDateTimeLabel" styleClass="label"/>
+            <Label fx:id="notificationLabel" text="" styleClass="label" visible="false"/>
+            <Label fx:id="employeeNameLabel" text="" styleClass="label" visible="false"/>
+            <TabPane styleClass="tab-pane">
+                <tabs>
+                    <Tab text="Ваши показатели эффективности">
+                        <TableView fx:id="efficiencyTable" prefWidth="400" prefHeight="200" styleClass="table-view">
+                            <columns>
+                                <TableColumn fx:id="efficiencyIdColumn" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="efficiencyKpiColumn" text="КПИ" prefWidth="150"/>
+                                <TableColumn fx:id="efficiencyRevenueColumn" text="Выручка (руб)" prefWidth="100"/>
+                                <TableColumn fx:id="efficiencyMonthYearColumn" text="Месяц, Год" prefWidth="150"/>
+                            </columns>
+                        </TableView>
+                    </Tab>
+                    <Tab text="Ваши премии">
+                        <TableView fx:id="bonusTable" prefWidth="400" prefHeight="200" styleClass="table-view">
+                            <columns>
+                                <TableColumn fx:id="bonusIdColumn" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="bonusEmployeeNameColumn" text="Сотрудник" prefWidth="150"/>
+                                <TableColumn fx:id="bonusAmountColumn" text="Сумма (руб)" prefWidth="100"/>
+                                <TableColumn fx:id="bonusMonthYearColumn" text="Месяц, Год" prefWidth="100"/>
+                            </columns>
+                        </TableView>
+                    </Tab>
+                    <Tab text="KPI отдела">
+                        <TableView fx:id="departmentKpiTable" prefWidth="400" prefHeight="200" styleClass="table-view">
+                            <columns>
+                                <TableColumn fx:id="departmentEmployeeNameColumn" text="Сотрудник" prefWidth="150"/>
+                                <TableColumn fx:id="departmentKpiColumn" text="КПИ" prefWidth="150"/>
+                                <TableColumn fx:id="departmentMonthYearColumn" text="Месяц, Год" prefWidth="100"/>
+                            </columns>
+                        </TableView>
+                    </Tab>
+                    <Tab text="Список сотрудников">
+                        <TableView fx:id="employeeListTable" prefWidth="400" prefHeight="200" styleClass="table-view">
+                            <columns>
+                                <TableColumn fx:id="employeeIdColumn" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="employeeNameColumn" text="Имя" prefWidth="150"/>
+                                <TableColumn fx:id="employeeDepartmentColumn" text="Отдел" prefWidth="100"/>
+                                <TableColumn fx:id="employeeRoleColumn" text="Роль" prefWidth="100"/>
+                            </columns>
+                        </TableView>
+                    </Tab>
+                </tabs>
+            </TabPane>
+        </VBox>
+    </items>
+</SplitPane>

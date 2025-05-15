@@ -5,6 +5,7 @@ import org.example.bonussystem.repository.*;
 import org.hibernate.type.ListType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -112,15 +113,18 @@ public class BonusService {
         bonusRepository.save(bonus);
     }
 
-
-    public List<Bonus> findAllByEmployeeId(Long id)
-    {
+    public List<Bonus> findAllByEmployeeId(Long id) {
         return bonusRepository.findAllByEmployeeId(id);
     }
 
-
     public void deleteBonus(Long id) {
         bonusRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteAllBonuses() {
+        bonusRepository.deleteAll();
+        System.out.println("All bonuses have been deleted.");
     }
 
     public void calculateBonus(PerformanceIndicator pi) {
@@ -137,7 +141,8 @@ public class BonusService {
         Bonus bonus = new Bonus();
         bonus.setEmployee(employee);
         bonus.setAmount(bonusAmount);
-        bonus.setYear(pi.getYear());
+        bonus.setMonth(pi.getMonth()); // Устанавливаем месяц из PerformanceIndicator
+        bonus.setYear(pi.getYear());   // Устанавливаем год из PerformanceIndicator
         bonusRepository.save(bonus);
     }
 }

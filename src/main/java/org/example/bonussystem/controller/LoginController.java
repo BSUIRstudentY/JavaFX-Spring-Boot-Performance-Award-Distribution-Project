@@ -9,13 +9,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.bonussystem.model.User;
+import org.example.bonussystem.repository.DepartmentRepository;
 import org.example.bonussystem.repository.EmployeeRepository;
 import org.example.bonussystem.repository.PerformanceIndicatorRepository;
+import org.example.bonussystem.repository.RoleRepository;
 import org.example.bonussystem.service.BonusService;
 import org.example.bonussystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -30,18 +33,21 @@ public class LoginController {
 
     private final ApplicationContext springContext;
     private final UserService userService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public LoginController(ApplicationContext springContext, UserService userService) {
+    public LoginController(ApplicationContext springContext, UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.springContext = springContext;
         this.userService = userService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @FXML
     private void initialize() {
         System.out.println("Initializing LoginController - usernameField: " + (usernameField != null) +
                 ", passwordField: " + (passwordField != null) +
-                ", errorLabel: " + (errorLabel != null));
+                ", errorLabel: " + (errorLabel != null) +
+                ", bCryptPasswordEncoder: " + (bCryptPasswordEncoder != null));
 
         if (errorLabel != null) {
             errorLabel.setText("");
@@ -62,7 +68,7 @@ public class LoginController {
 
         User user = userService.findByUsername(username);
 
-        if (user == null || !user.getPassword().equals(password)) {
+        if (user == null || bCryptPasswordEncoder == null || !bCryptPasswordEncoder.matches(password, user.getPassword())) {
             errorLabel.setText("Неверное имя пользователя или пароль.");
             return;
         }
@@ -89,10 +95,12 @@ public class LoginController {
                 PerformanceIndicatorRepository perfRepo = ctx.getBean(PerformanceIndicatorRepository.class);
                 EmployeeRepository empRepo = ctx.getBean(EmployeeRepository.class);
                 BonusService bonusService = ctx.getBean(BonusService.class);
-
+                DepartmentRepository departmentRepository = springContext.getBean(DepartmentRepository.class);
+                RoleRepository roleRepository = springContext.getBean(RoleRepository.class);
+                UserService userService = springContext.getBean(UserService.class);
                 System.out.println("Creating UserController with user: " + user.getUsername());
                 loader.setControllerFactory(param -> new UserController(
-                        ctx, user, perfRepo, empRepo, bonusService
+                        ctx, user, perfRepo, empRepo, bonusService, departmentRepository, roleRepository, userService
                 ));
 
                 Parent root = loader.load();

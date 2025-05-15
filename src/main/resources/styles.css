@@ -131,3 +131,34 @@
 }
 
 
+/* Существующие стили */
+.custom-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.custom-textfield {
+    -fx-font-size: 14px;
+}
+
+.combo-box {
+    -fx-font-size: 14px;
+}
+
+.table-view {
+    -fx-font-size: 14px;
+}
+
+/* Новый стиль для консоли */
+.console-pane {
+    -fx-padding: 10;
+    -fx-background-color: #000000; /* Чёрный фон */
+}
+
+#consoleInput, #consoleOutput {
+    -fx-control-inner-background: #000000; /* Чёрный фон для TextArea */
+    -fx-text-fill: #ffffff; /* Белый текст */
+    -fx-font-family: "Courier New"; /* Моноширинный шрифт для кода */
+    -fx-font-size: 14px;
+}
